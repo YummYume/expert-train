@@ -1,0 +1,3 @@
+https://tf.yam-yam.dev {
+	reverse_proxy * svelte-kit:3000
+}

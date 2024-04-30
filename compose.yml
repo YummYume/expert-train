@@ -1,0 +1,25 @@
+services:
+  caddy:
+    image: caddy:2.7.6-alpine
+    restart: unless-stopped
+    container_name: tf-caddy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./data/caddy_data:/data
+      - ./data/caddy_config:/config
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+
+  svelte-kit:
+    container_name: tf-svelte-kit
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    command: ["bun", "build/index.js"]
+    environment:
+      - ORIGIN=https://tf.yam-yam.dev
+      - PORT=3000
