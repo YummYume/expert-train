@@ -1,38 +1,39 @@
-# create-svelte
+# expert-train
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+A SvelteKit application deployed on an Azure VM with Terraform.
 
-## Creating a project
+## Content
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [expert-train](#expert-train)
+  - [Content](#content)
+  - [Setup](#setup)
+  - [Deployment](#deployment)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Setup
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+You need to create a SSH key with RSA if you don't already have one, and then provide the path to the private key with the `ssh_key` variable.
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+You need to provide the following variables, in a `terraform.tfvars` file or directly in the command line :
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+admin_username # The username of the admin user
+admin_password # The password of the admin user (root login is disabled)
+ssh_key # The path to the private key to use to connect to the VM
 ```
 
-## Building
+Additionnal variables can be found in the `variables.tf` file.
 
-To create a production version of your app:
+## Deployment
+
+To deploy with Terraform :
 
 ```bash
-npm run build
+cd terraform
+
+terraform init
+terraform validate
+terraform plan
+
+# If everything is ok
+terraform apply
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
