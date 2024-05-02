@@ -13,7 +13,7 @@ WORKDIR /home/bun/app
 
 COPY --chown=bun:bun --from=builder /home/bun/app/build ./build
 COPY --chown=bun:bun static ./static
-COPY --chown=bun:bun /home/bun/app/package.json /home/bun/app/bun.lockb ./
+COPY --chown=bun:bun package.json bun.lockb ./
 
 ENV ORIGIN=https://tf.yam-yam.dev
 ENV PORT=3000
