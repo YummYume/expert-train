@@ -16,12 +16,6 @@ variable "ssh_key" {
   description = "The location of your SSH public key"
 }
 
-variable "domain" {
-  type        = string
-  description = "The custom domain to use for the VM"
-  default     = "tf.yam-yam.dev"
-}
-
 # OS
 variable "os_publisher" {
   type        = string
