@@ -17,9 +17,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        - ORIGIN=https://tf.yam-yam.dev
-        - PORT=3000
     ports:
       - 3000:3000
     command: ["bun", "build/index.js"]
