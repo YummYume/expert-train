@@ -16,6 +16,8 @@ COPY --chown=bun:bun --from=builder /home/bun/app/build ./build
 
 ENV ORIGIN=https://tf.yam-yam.dev
 ENV PORT=3000
+ENV PROTOCOL_HEADER=x-forwarded-proto
+ENV HOST_HEADER=x-forwarded-host
 
 RUN bun install
 
