@@ -11,16 +11,23 @@ FROM oven/bun:alpine
 
 WORKDIR /home/bun/app
 
-COPY --chown=bun:bun --from=builder /home/bun/app/package.json /home/bun/app/bun.lockb ./
 COPY --chown=bun:bun --from=builder /home/bun/app/build ./build
+COPY --chown=bun:bun static ./static
+COPY --chown=bun:bun /home/bun/app/package.json /home/bun/app/bun.lockb ./
 
 ENV ORIGIN=https://tf.yam-yam.dev
 ENV PORT=3000
 ENV PROTOCOL_HEADER=x-forwarded-proto
 ENV HOST_HEADER=x-forwarded-host
 
-RUN bun install
+COPY --from=node:20-alpine /usr/lib /usr/lib
+COPY --from=node:20-alpine /usr/local/share /usr/local/share
+COPY --from=node:20-alpine /usr/local/lib /usr/local/lib
+COPY --from=node:20-alpine /usr/local/include /usr/local/include
+COPY --from=node:20-alpine /usr/local/bin /usr/local/bin
+
+RUN bun install --production --frozen-lockfile
 
 USER bun
 
-CMD ["bun", "build/index.js"]
+CMD ["node", "build"]
