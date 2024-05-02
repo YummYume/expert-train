@@ -13,12 +13,10 @@ services:
       - 443:443/udp
 
   svelte-kit:
-    container_name: tf-svelte-kit
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 3000:3000
+    container_name: tf-svelte-kit
     command: ["bun", "build/index.js"]
     environment:
       - ORIGIN=https://tf.yam-yam.dev
