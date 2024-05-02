@@ -23,6 +23,13 @@ ssh_key # The path to the private key to use to connect to the VM
 
 Additionnal variables can be found in the `variables.tf` file.
 
+> [!IMPORTANT]
+> You need to run `az login` before running Terraform commands to authenticate with Azure.
+
+```bash
+az login
+```
+
 ## Deployment
 
 To deploy with Terraform :
